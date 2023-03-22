@@ -26,12 +26,11 @@ room_no number,
 room_name varchar2(40),
 room_image varchar2(256),
 per_day_price number,
-description varchar2(50),
+description varchar2(100),
 capacity number,
 category varchar2(20),
-type varchar2(10),
+type varchar2(40),
 primary key(room_id));
-
 
 
 create table orders(
@@ -54,9 +53,28 @@ insert into role(role_id,role_name,description)values(1, 'Admin', 'Can access an
 insert into role(role_id,role_name,description)values(2, 'Guest', 'Has limited access to view system information.');
 
 
+insert into user_info(user_id,first_name,last_name,user_name,email,password,phone,role_id)values(101,'John','Doe','johndoe','johndoe@example.com','password123','555-1234',1);
+insert into user_info(user_id,first_name,last_name,user_name,email,password,phone,role_id)values(102,'Jane','Smith','janesmith','janesmith@example.com','mypassword','555-5678',2);
+insert into user_info(user_id,first_name,last_name,user_name,email,password,phone,role_id)values(103,'Bob','Johnson','BobJohnson','bobjohnson@example.com','passwordbob','555-1235',2);
+insert into user_info(user_id,first_name,last_name,user_name,email,password,phone,role_id)values(104,'Alice','Lee','AliceLee','alicelee@example.com','passwordalice','555-1236',2);
+insert into user_info(user_id,first_name,last_name,user_name,email,password,phone,role_id)values(105,'David','Kim','DavidKim','davidkim@example.com','passworddavid','555-1237',2);
 
-insert into user_info(user_id, first_name, last_name, user_name, email, password, phone, role_id) VALUES(1, 'John', 'Doe', 'johndoe', 'johndoe@example.com', 'password123', '555-1234', 1);
-insert into user_info(user_id,first_name,last_name,user_name,email,password,phone,role_id)values(2, 'Jane', 'Smith', 'janesmith', 'janesmith@example.com', 'mypassword', '555-5678', 2);
+
+insert into room(room_id,room_no,room_name,room_image,per_day_price,description,capacity,category,type)values(1,101,'Garden View','room3.jpg',100,'Room with a view of the garden',2,'Standard','Double Room');
+insert into room(room_id,room_no,room_name,room_image,per_day_price,description,capacity,category,type)values(2,102,'Ocean View','room4.jpg',150,'Room with a view of the ocean',2,'Deluxe','Double Room');
+insert into room(room_id,room_no,room_name,room_image,per_day_price,description,capacity,category,type)values(3,103,'Executive Suite','room1.jpg',300,'Spacious suite with a separate living room and study',1,'Suite','Single Room');
+insert into room(room_id,room_no,room_name,room_image,per_day_price,description,capacity,category,type)values(4,104,'River View','room7.jpg',400,'Room with a view of the river',2,'Luxurious','Double Room');
+insert into room(room_id,room_no,room_name,room_image,per_day_price,description,capacity,category,type)values(5,105,'Penthouse','room9.jpg',400,'Luxurious penthouse with a private terrace',2,'Premium','Double Room');
 
 
+insert into orders (order_id, room_id, date_of_checking, date_of_checkout, user_id, tax, discount, total, note, payment_method)values (1, 1, to_date('2023-04-01','YYYY-MM-DD'), to_date('2023-04-05','YYYY-MM-DD'), 101, 20.00, 0.00, 500.00, 'Early check-in requested', 'Credit Card');
+insert into orders (order_id, room_id, date_of_checking, date_of_checkout, user_id, tax, discount, total, note, payment_method)values (2, 2, to_date('2023-04-15','YYYY-MM-DD'), to_date('2023-04-20','YYYY-MM-DD'), 102, 60.00, 25.00, 700.00, 'Late check-out requested', 'Cash');
+insert into orders (order_id, room_id, date_of_checking, date_of_checkout, user_id, tax, discount, total, note, payment_method)values (3, 3, to_date('2023-04-01','YYYY-MM-DD'), to_date('2023-04-05','YYYY-MM-DD'), 103, 84.00, 0.00, 900.00, 'Additional bed requested', 'Debit Card');
+insert into orders (order_id, room_id, date_of_checking, date_of_checkout, user_id, tax, discount, total, note, payment_method)values (4, 4, to_date('2023-06-10','YYYY-MM-DD'), to_date('2023-06-15','YYYY-MM-DD'), 104, 30.00, 50.00, 670.00, 'Room upgrade to deluxe requested', 'Cash');
+insert into orders (order_id, room_id, date_of_checking, date_of_checkout, user_id, tax, discount, total, note, payment_method)values (5, 5, to_date('2023-07-01','YYYY-MM-DD'), to_date('2023-07-03','YYYY-MM-DD'), 105, 12.00, 0.00, 320.00, 'Room upgrade to deluxe requested', 'Credit Card');
+
+
+select * from role;
 select * from user_info;
+select * from room;
+select * from orders;
