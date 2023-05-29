@@ -1,0 +1,67 @@
+
+create table ROLE(
+role_id number,
+role_name varchar2(20) not null,
+description varchar2(50),
+primary key(role_id));
+
+
+create table user_info(
+user_id number,
+first_name varchar2(20) not null,
+last_name varchar2(20) not null,
+user_name varchar2(30) not null,
+email varchar2(256) unique not null,
+password varchar2(50) not null,
+phone varchar2(15),
+role_id number,
+primary key(user_id),
+foreign key(role_id) references ROLE(role_id)
+);
+
+
+create table ROOM(
+room_id number,
+room_no number,
+room_name varchar2(40) unique not null,
+room_image varchar2(256),
+per_day_price number not null,
+description varchar2(100),
+capacity number,
+category varchar2(20),
+type varchar2(40),
+primary key(room_id));
+
+
+create table orders(
+order_id number,
+room_id number,
+date_of_checking date not null,
+date_of_checkout date not null,
+user_id number,
+tax number,
+discount number,
+total number,
+note varchar2(60),
+payment_method varchar2(30) not null,
+CONSTRAINT check_date check(
+date_of_checkout > date_of_checking),
+primary key(order_id),
+foreign key(room_id) references ROOM(room_id),
+foreign key(user_id) references user_info(user_id));
+
+
+/* Using DDL Commands */
+
+/* add column */
+alter table role add age integer check(age>=18);
+
+/* modify column */
+alter table role modify role_age number check(role_age>=18);
+
+/* rename column */
+alter table role rename column age to role_age;
+alter table room rename column type to room_type;
+
+/* drop column */
+alter table role drop column role_age;
